@@ -902,6 +902,13 @@ config ARCH_HAS_PTE_SPECIAL
 config LARGE_DIRTY_BUFFER
 	bool "Use large dirty_threshold value by enabling dirty_ratio"
 	default n
+
+source "mm/damon/Kconfig"
+
+config FORCE_ALLOC_FROM_DMA_ZONE
+	bool "Force certain memory allocators to always return ZONE_DMA32 memory"
+	depends on ZONE_DMA32
+
 	help
 	  This config enables dirty_ratio/dirty_background_ratio,
 	  and it means large dirty_threshold value in 64bit architectures.
