@@ -59,7 +59,14 @@
 #define ARM64_HAS_SB				38
 #define ARM64_WORKAROUND_SPECULATIVE_SSBS	39
 
-/* kabi: reserve 40 - 62 for future cpu capabilities */
+#define ARM64_HAS_ADDRESS_AUTH_ARCH		40
+#define ARM64_HAS_ADDRESS_AUTH_IMP_DEF		41
+#define ARM64_HAS_ADDRESS_AUTH			42
+#define ARM64_HAS_GENERIC_AUTH_ARCH		43
+#define ARM64_HAS_GENERIC_AUTH_IMP_DEF		44
+#define ARM64_HAS_GENERIC_AUTH			45
+
+/* kabi: reserve 46 - 62 for future cpu capabilities */
 #define ARM64_NCAPS				62
 
 #endif /* __ASM_CPUCAPS_H */
