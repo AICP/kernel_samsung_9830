@@ -2685,6 +2685,15 @@ SYSCALL_DEFINE5(prctl, int, option, unsigned long, arg2, unsigned long, arg3,
 			return -EINVAL;
 		error = SET_TAGGED_ADDR_CTRL(arg2);
 		break;
+	case PR_PAC_RESET_KEYS:
+		if (arg3 || arg4 || arg5)
+			return -EINVAL;
+#ifdef PAC_RESET_KEYS
+		error = PAC_RESET_KEYS(me, arg2);
+#else
+		error = -EINVAL;
+#endif
+		break;
 	case PR_GET_TAGGED_ADDR_CTRL:
 		if (arg2 || arg3 || arg4 || arg5)
 			return -EINVAL;

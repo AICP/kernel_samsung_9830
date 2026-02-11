@@ -314,4 +314,6 @@ long get_tagged_addr_ctrl(void);
 #define on_thread_stack()	(on_task_stack(current, current_stack_pointer, NULL))
 
 #endif /* __ASSEMBLY__ */
+#define PAC_RESET_KEYS(tsk, arg)	ptrauth_prctl_reset_keys(tsk, arg)
+
 #endif /* __ASM_PROCESSOR_H */
