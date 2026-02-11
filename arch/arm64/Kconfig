@@ -1581,3 +1581,23 @@ source "arch/arm64/kvm/Kconfig"
 if CRYPTO
 source "arch/arm64/crypto/Kconfig"
 endif
+
+config ARM64_PTR_AUTH
+bool "Enable support for pointer authentication"
+default y
+depends on !KVM || ARM64_VHE
+help
+  Pointer authentication (part of the ARMv8.3 Extensions) provides a
+  sign and authenticate instruction set that can be used to create
+  independent keys, which can be combined with the context of a code
+  sequence and a modifier to produce a pointer authentication code.
+
+  The keys are created globally and then saved and restored for each
+  task.
+
+  If the hardware supports it, these keys will be used to verify the
+  integrity of the function return addresses and to authenticate
+  pointers.
+
+  If the hardware does not support pointer authentication, this option
+  will have no effect.
