@@ -229,22 +229,6 @@ static phys_addr_t __init max_zone_dma_phys(void)
 	return min(offset + (1ULL << 32), memblock_end_of_DRAM());
 }
 
-#ifdef CONFIG_NUMA
-
-static void __init zone_sizes_init(unsigned long min, unsigned long max)
-{
-	unsigned long max_zone_pfns[MAX_NR_ZONES]  = {0};
-
-#ifdef CONFIG_ZONE_DMA32
-	max_zone_pfns[ZONE_DMA32] = PFN_DOWN(max_zone_dma_phys());
-#endif
-	max_zone_pfns[ZONE_NORMAL] = max;
-
-	free_area_init_nodes(max_zone_pfns);
-}
-
-#else
-
 unsigned long __initdata required_corepages;
 static int __init cmdline_parse_corememsize(char *p)
 {
@@ -264,6 +248,22 @@ static int __init cmdline_parse_corememsize(char *p)
 	return 0;
 }
 early_param("corememsize", cmdline_parse_corememsize);
+
+#ifdef CONFIG_NUMA
+
+static void __init zone_sizes_init(unsigned long min, unsigned long max)
+{
+	unsigned long max_zone_pfns[MAX_NR_ZONES]  = {0};
+
+#ifdef CONFIG_ZONE_DMA32
+	max_zone_pfns[ZONE_DMA32] = PFN_DOWN(max_zone_dma_phys());
+#endif
+	max_zone_pfns[ZONE_NORMAL] = max;
+
+	free_area_init_nodes(max_zone_pfns);
+}
+
+#else
 
 static void __init zone_sizes_init(unsigned long min, unsigned long max)
 {
