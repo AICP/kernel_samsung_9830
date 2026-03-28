@@ -3,7 +3,8 @@
 #define __ASM_POINTER_AUTH_H
 
 #include <linux/random.h>
-#include <linux/sched.h>
+
+struct task_struct;
 
 #include <asm/cpufeature.h>
 #include <asm/sysreg.h>
