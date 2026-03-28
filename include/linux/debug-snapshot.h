@@ -247,10 +247,6 @@ static inline int dbg_snapshot_get_dpm_item_value(char *first, char *second, cha
 	return -1;
 }
 #ifndef CONFIG_UML
-static inline int dbg_snapshot_get_hardlockup(void)
-{
-	return 0;
-}
 #endif
 
 #define secdbg_hardlockup_get_info(a, b)	do { } while (0)
