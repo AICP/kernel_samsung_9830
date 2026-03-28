@@ -80,8 +80,8 @@ do {									\
  * The EL0 pointer bits used by a pointer authentication code.
  * This is dependent on TBI0 being enabled, or bits 63:56 would also apply.
  */
-#define ptrauth_user_pac_mask()						\
-	(GENMASK(54, vabits_user) | BIT(55))
+#define ptrauth_user_pac_mask()                                        \
+        (GENMASK(54, VA_BITS) | BIT(55))
 
 #else /* CONFIG_ARM64_PTR_AUTH */
 
