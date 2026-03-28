@@ -996,30 +996,6 @@ static int pac_mask_get(struct task_struct *target,
 }
 #endif /* CONFIG_ARM64_PTR_AUTH */
 
-#ifdef CONFIG_ARM64_PTR_AUTH
-static int pac_mask_get(struct task_struct *target,
-			const struct user_regset *regset,
-			unsigned int pos, unsigned int count,
-			void *kbuf, void __user *ubuf)
-{
-	/*
-	 * The PAC bits can differ across data and instruction pointers
-	 * depending on TCR_EL1.TBID*, which we may make use of in future, so
-	 * we expose separate masks.
-	 */
-	unsigned long mask = ptrauth_user_pac_mask();
-	struct user_pac_mask uregs = {
-		.data_mask = mask,
-		.insn_mask = mask,
-	};
-
-	if (!system_supports_address_auth())
-		return -EINVAL;
-
-	return user_regset_copyout(&pos, &count, &kbuf, &ubuf, &uregs, 0, -1);
-}
-#endif /* CONFIG_ARM64_PTR_AUTH */
-
 
 
 enum aarch64_regset {
